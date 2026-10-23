@@ -29,6 +29,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  void _editFullName() {
+    TextEditingController controller = TextEditingController(text: fullName);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Ubah Nama Lengkap'),
+          content: TextField(
+            controller: controller,
+            decoration: const InputDecoration(
+              labelText: 'Nama Lengkap',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  fullName = controller.text;
+                });
+                Navigator.pop(context);
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +135,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   label: 'Nama',
                   value: fullName,
                   showEditIcon: isSignedIn,
-                  onEditPressed: () => debugPrint('Icon edit ditekan'),
+                  onEditPressed:
+                      _editFullName, //() => debugPrint('Icon edit ditekan'),
                   iconColor: Colors.blue,
                 ),
                 const SizedBox(height: 4),
