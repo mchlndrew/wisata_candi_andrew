@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      home: DetailScreen(candi: candiList[0]),
-      // home: const ProfileScreen(),
+      // home: DetailScreen(candi: candiList[0]),
+      home: const ProfileScreen(),
     );
   }
 }

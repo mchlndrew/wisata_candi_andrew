@@ -18,14 +18,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // TODO: 5. Implementasi fungsi signIn
   void signIn() {
     setState(() {
-      isSignedIn = !isSignedIn;
+      isSignedIn = true;
+      userName = 'Ahau';
+      fullName = 'AhauGalon';
+      favoriteCandiCount = 2;
     });
   }
 
   // TODO: 6. Implementasi fungsi signOut
   void signOut() {
     setState(() {
-      isSignedIn = !isSignedIn;
+      isSignedIn = false;
+      userName = '';
+      fullName = '';
+      favoriteCandiCount = 0;
     });
   }
 
