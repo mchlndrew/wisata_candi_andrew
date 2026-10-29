@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:provider/provider.dart';
 import 'package:wisata_candi_drewww/models/candi.dart';
+import 'package:wisata_candi_drewww/providers/favorite_provider.dart';
+import 'package:wisata_candi_drewww/screens/profile_screen.dart';
+
 
 class DetailScreen extends StatelessWidget {
   final Candi candi;
@@ -9,6 +13,9 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isFav = context
+      .watch<FavoriteProvider>()
+      .isFavorite(candi.name);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -94,8 +101,13 @@ class DetailScreen extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_border),
+                        onPressed: () {
+                          context.read<FavoriteProvider>().toggle(candi.name);
+                        },
+                        icon: Icon(
+                          isFav ? Icons.favorite : Icons.favorite_border,
+                          color: isFav ? Colors.red : null,
+                        ),
                       ),
                     ],
                   ),
@@ -180,9 +192,6 @@ class DetailScreen extends StatelessWidget {
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: GestureDetector(
-                            // =========================================
-                            // PERUBAHAN DI BAGIAN ONTAP DI BAWAH INI:
-                            // =========================================
                             onTap: () {
                               showDialog(
                                 context: context,
@@ -251,6 +260,17 @@ class DetailScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const ProfileScreen()),
+          );
+        },
+        child: const Icon(Icons.person),
+      ),
+
     );
   }
 }
