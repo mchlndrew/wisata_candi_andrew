@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:wisata_candi_drewww/providers/favorite_provider.dart';
 import 'package:wisata_candi_drewww/providers/auth_provider.dart';
 
-
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -77,10 +75,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final favoriteCount =
-    context.watch<FavoriteProvider>().count;
+    final favoriteCount = context.watch<FavoriteProvider>().count;
     final auth = context.watch<AuthProvider>();
-
 
     return Scaffold(
       body: Stack(
@@ -171,16 +167,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Divider(color: Colors.deepPurple[100]),
                 const SizedBox(height: 20),
                 auth.isSignedIn
-                  ? TextButton(
-                    onPressed: () =>
-                      context.read<AuthProvider>().signOut(),
-                    child: const Text('Sign Out'))
-                    : TextButton(onPressed: signIn, child: const Text('Sign In')),
-            ],
+                    ? TextButton(
+                        onPressed: () => context.read<AuthProvider>().signOut(),
+                        child: const Text('Sign Out'),
+                      )
+                    : TextButton(
+                        onPressed: signIn,
+                        child: const Text('Sign In'),
+                      ),
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
-  );
- }
+        ],
+      ),
+    );
+  }
 }
