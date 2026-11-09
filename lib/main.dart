@@ -3,9 +3,11 @@ import 'package:wisata_candi_drewww/data/candi_data.dart';
 import 'package:wisata_candi_drewww/screens/detail_screen.dart';
 import 'package:wisata_candi_drewww/screens/profile_screen.dart';
 import 'package:wisata_candi_drewww/screens/sign_in_screen.dart';
+import 'package:wisata_candi_drewww/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:wisata_candi_drewww/providers/favorite_provider.dart';
 import 'package:wisata_candi_drewww/providers/auth_provider.dart';
+
 
 
 
@@ -36,9 +38,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      home: DetailScreen(candi: candiList[0]),
+      // home: DetailScreen(candi: candiList[0]),
       // home: const ProfileScreen(),
       // home : SignInScreen(),
+      home: const SearchScreen(),
     );
   }
 }
