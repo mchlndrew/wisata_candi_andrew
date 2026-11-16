@@ -1,9 +1,13 @@
+import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
+
 import 'package:flutter/material.dart';
 import 'package:wisata_candi_drewww/data/candi_data.dart';
 import 'package:wisata_candi_drewww/screens/detail_screen.dart';
+import 'package:wisata_candi_drewww/screens/home_screen.dart';
 import 'package:wisata_candi_drewww/screens/profile_screen.dart';
 import 'package:wisata_candi_drewww/screens/sign_in_screen.dart';
 import 'package:wisata_candi_drewww/screens/search_screen.dart';
+import 'package:wisata_candi_drewww/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:wisata_candi_drewww/providers/favorite_provider.dart';
 import 'package:wisata_candi_drewww/providers/auth_provider.dart';
@@ -41,7 +45,18 @@ class MyApp extends StatelessWidget {
       // home: DetailScreen(candi: candiList[0]),
       // home: const ProfileScreen(),
       // home : SignInScreen(),
-      home: const SearchScreen(),
+      // home: const SearchScreen(),
+      // home: HomeScreen(),
+      // home : MainScreen(),
     );
   }
+  // class MainScreen extends StatefulWidget{
+  //   const MainScreen ({super.key});
+
+  //   @override
+  //   State<MainScreen> createState() => _MainScreenState();
+  // }
+  // class _MainScreenState extends State <MainScreen> {
+
+  // }
 }
