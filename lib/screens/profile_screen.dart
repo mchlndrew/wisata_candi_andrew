@@ -3,6 +3,7 @@ import 'package:wisata_candi_drewww/widgets/profile_info_item.dart';
 import 'package:provider/provider.dart';
 import 'package:wisata_candi_drewww/providers/favorite_provider.dart';
 import 'package:wisata_candi_drewww/providers/auth_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,18 +19,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String userName = '';
   int favoriteCandiCount = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool signedIn = prefs.getBool('isSignedIn') ?? false;
+    final String savedUsername = prefs.getString('username') ?? '';
+    final String savedFullName = prefs.getString('fulname') ?? '';
+
+    if (!mounted) return;
+    setState(() {
+      isSignedIn = signedIn;
+      userName = signedIn ? savedUsername : '';
+      fullName = signedIn ? savedFullName : '';
+    });
+  }
+
   // TODO: 5. Implementasi fungsi signIn
   void signIn() {
-    setState(() {
-      isSignedIn = true;
-      userName = 'Ahau';
-      fullName = 'AhauGalon';
-      favoriteCandiCount = 2;
+    Navigator.pushNamed(context, '/signin').then((_) {
+      _loadUserData();
     });
   }
 
   // TODO: 6. Implementasi fungsi signOut
-  void signOut() {
+  // TODO: 6. Implementasi fungsi signOut
+  Future<void> signOut() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isSignedIn', false);
+
+    if (!mounted) return;
     setState(() {
       isSignedIn = false;
       userName = '';

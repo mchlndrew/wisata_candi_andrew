@@ -14,9 +14,6 @@ import 'package:provider/provider.dart';
 import 'package:wisata_candi_drewww/providers/favorite_provider.dart';
 import 'package:wisata_candi_drewww/providers/auth_provider.dart';
 
-
-
-
 // void main() {
 //   runApp(const MyApp());
 // }
@@ -31,6 +28,7 @@ void main() {
     ),
   );
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -47,36 +45,38 @@ class MyApp extends StatelessWidget {
       // home: DetailScreen(candi: candiList[0]),
       // home: const ProfileScreen(),
       // home : SignInScreen(),
+      home: SignUpScreen(),
       // home: const SearchScreen(),
       // home: HomeScreen(),
       // home : MainScreen(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const MainScreen(),
-        '/homescreen': (context) => const HomeScreen(),
-        '/signin': (context) => SignInScreen(),
-        '/signup': (context) => const SignUpScreen(),
-      },
+      // initialRoute: '/',
+      // routes: {
+      //   '/': (context) => const MainScreen(),
+      //   '/homescreen': (context) => const HomeScreen(),
+      //   '/signin': (context) => SignInScreen(),
+      //   '/signup': (context) => const SignUpScreen(),
+      // },
     );
   }
 }
 
-class MainScreen extends StatefulWidget{
-  const MainScreen ({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
-class _MainScreenState extends State <MainScreen> {
+
+class _MainScreenState extends State<MainScreen> {
   /// todo 1 Deklarasikan  Variabel
   int _currentIndex = 0;
-    
+
   final List<Widget> _children = [
     HomeScreen(),
     SearchScreen(),
     FavoriteScreen(),
     ProfileScreen(),
-	];
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +85,8 @@ class _MainScreenState extends State <MainScreen> {
       body: _children[_currentIndex],
       //TODO: 3. Buat properti bottomNavigationBar dengan nilai Theme
       bottomNavigationBar: Theme(
-      // TODO: 4. Buat data dan child dari Theme
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors.deepPurple[50]
-        ), 
+        // TODO: 4. Buat data dan child dari Theme
+        data: Theme.of(context).copyWith(canvasColor: Colors.deepPurple[50]),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
@@ -96,7 +94,7 @@ class _MainScreenState extends State <MainScreen> {
               _currentIndex = index;
             });
           },
-          items: const[
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home, color: Colors.deepPurple),
               label: 'Home',
@@ -117,9 +115,8 @@ class _MainScreenState extends State <MainScreen> {
           selectedItemColor: Colors.deepPurple,
           unselectedItemColor: Colors.deepPurple[100],
           showUnselectedLabels: true,
-        )
+        ),
       ),
     );
   }
 }
-  

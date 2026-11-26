@@ -21,25 +21,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
 
+    if (name.isEmpty || username.isEmpty) {
+      setState(() {
+        _errorText = 'Nama lengkap dan nama pengguna wajib diisi.';
+      });
+      return;
+    }
+
     if (password.length < 8 ||
         !password.contains(RegExp(r'[A-Z]')) ||
         !password.contains(RegExp(r'[a-z]')) ||
         !password.contains(RegExp(r'[0-9]')) ||
         !password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
       setState(() {
-        _errorText =
-            'Minimal 8 karakter, kombinasi huruf besar, huruf kecil, angka, dan simbol.';
+        _errorText = 'Minimal 8 karakter, kombinasi huruf besar, huruf kecil, angka, dan simbol.';
       });
       return;
     }
 
-    if (name.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
-      setState(() {
-        _errorText = '';
-      });
-      // Navigasi ke halaman Sign In setelah berhasil mendaftar
-      Navigator.pushReplacementNamed(context, '/signin');
-    }
+    setState(() {
+      _errorText = '';
+    });
+
+    print('*** Sign up berhasil!');
+    print('Nama: $name');
+    print('Nama Pengguna: $username');
+    print('Password: $password');
   }
 
   @override
@@ -53,9 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Up'),
-      ),
+      appBar: AppBar(title: const Text('Sign Up')),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -126,7 +131,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.pushReplacementNamed(
-                                  context, '/signin');
+                                context,
+                                '/signin',
+                              );
                             },
                         ),
                       ],
